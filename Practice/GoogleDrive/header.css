@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Work Sans', sans-serif;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dbdcdc;
+    width: 100vw;
+    height: 64px;
+}
+
+.drive-logo{
+    display: grid;
+    grid-template-columns: 55px 200px;
+    align-items: center;
+    height: 70px;
+    width: 255px;
+    font-size: 22px;
+    font-weight: 360;
+    margin-left: 15px;
+    color: #5F6368;
+}
+
+.serch-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+}
+
+.lookup {
+    width: 56px; 
+    height: 48px;
+    background-color: #F1F3F4;
+    border: none;
+    border-radius: 7px 0px 0px 7px;
+    padding-top: 5px;
+}
+
+.serch {
+    background-color: #F1F3F4;
+    border: none;
+    height: 48px;
+    width: 635px;
+} @media screen and (max-width: 1330px) {
+    .serch {
+        width: 83.19%;
+    }
+} @media screen and (max-width: 1030px) {
+    .serch {
+        width: 383px;
+    }
+}
+.serch::placeholder {
+    font-size: 16px;
+    font-weight: 350;
+    color: #999999
+    
+}
+
+.filter {
+    width: 40px; 
+    height: 48px;
+    background-color: #F1F3F4;
+    border: none;
+    border-radius: 0px 7px 7px 0px;
+}
+
+
+.functions{
+    display: grid;
+    grid-template-columns: 44px 44px 80px 135px;
+    justify-items: center;
+    align-items: center;
+    height: 70px;
+    width: 420px;
+}
+
+.support{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: white;
+    border: none;
+}
+
+.settings{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: white;
+    border: none;
+}
+
+.google-apps{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: white;
+    border: none;
+}
+
+.profile {
+    width: 134px;
+    height: 48px;
+    margin-right: 20px;
+    border-radius: 7px;
+    border: 1px solid #dbdcdc;
+    background-color: white;
+    
+}
+

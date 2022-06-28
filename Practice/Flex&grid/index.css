@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #EFF3F9;
+}
+
+.dlp-header {
+    border: 1.125px solid #E0E9F5;
+    border-radius: 10px;
+    display: grid;
+    width: 1328px;
+    height: 76px;
+    grid-template-columns: 109px 371.11px 512.23px 193.59px 48.19px 98.88px;
+    background-color: white;
+}
+
+.logo {
+    width: 27.28px;
+    height: 32.49px;
+    margin-left: 61px;
+}
+
+.class-name {
+    width: 357px;
+    height: 24px;
+}
+
+.tutor {
+    width: 77px;
+    height: 17px;
+}
+
+.progress {
+    width: 168px;
+    height: 41px;
+}
+
+.alram {
+    width: 38px;
+    height: 38px;
+}
+
+.profile {
+    width: 40.22px;
+    height: 40.22px;
+}
+
+.dlp-main{
+    display: grid;
+    width: 1328px;
+    height: 994px;
+    margin-top: 1%;
+    grid-template-columns: 62.92% 35.69%;
+    column-gap: 1.39%;
+}
+
+.dlp-main-left{
+    display: grid;
+    width: 69.02vh;
+    height: 100%;
+    grid-template-rows: 51px 33.01vh 1fr;
+    row-gap: 20px;
+}
+
+.dlp-main-right{
+    display: grid;
+    width: 38.17vh;
+    height: 100%;
+    grid-template-rows: 17.60% 82.4%;
+    row-gap: 2.01%;
+}
+
+.navigation-bar{
+    border: 1px solid #E0E9F5;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.vod{
+    border: 1px solid #E0E9F5;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.lecture-note{
+    border: 1px solid #E0E9F5;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.mission{
+    border: 1px solid #E0E9F5;
+    border-radius: 10px;
+    width: 100%;
+    height: auto !important;
+    background-color: white;
+}
+
+.reply{
+    border: 1px solid #E0E9F5;
+    height: 100%;
+    border-radius: 10px;
+    background-color: white;
+}

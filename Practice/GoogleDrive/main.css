@@ -1,0 +1,136 @@
+.main { 
+    display: grid;
+    grid-template-columns: 254px 1fr 56px;
+    width: 100%;
+    height: 100%;
+} @media screen and (max-width: 1000px) {
+    .main {
+    grid-template-columns: 254px 700px 56px;
+    }
+}
+
+.main-menu {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 73px 297px 76px 1fr;
+
+}
+
+.make-new {
+    display: flex;
+    align-items: center;
+    width: 100%
+}
+
+.make-new-button {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 148.72px;
+    height: 50px;
+    border-radius: 28px;
+    margin-left: 8px;
+    border: 0.1px solid #f2f2f2;
+    background-color: white;
+    font-size: 13.8px;
+    text-align: center;
+    box-shadow: 0.2px 0.8px 1px gray;
+}
+
+.menu-bar {
+    display: flex;
+    flex-direction: column;
+    width: 100%
+}
+
+.menu-1, .menu-2, .menu-3, .menu-4, .menu-5, .menu-6, .menu-7 {
+    display: grid;
+    grid-template-columns: 24px 44px 1fr;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    font-size: 13px ;
+    color: #686c72;
+}
+
+.menu-7 {
+    margin-top: 18px;
+    padding-top: 8px;
+    border-top: 1px solid #dbdcdc;
+}
+
+.saving-space {
+    display: grid;
+    grid-template-rows: 10px 16px 1fr;
+    width: 100%
+}
+
+.saving-space-bar{
+    width: 175px;
+    height: 4px;
+    background-color: #e7e8eaf8;
+    margin: 4px 0px 0px 22px;
+}
+
+.saving-space-desc{
+    width: 100%;
+    font-size: 13px ;
+    color: #686c72;
+    margin: 7px 0px 0px 22px;
+}
+
+.saving-space-admin{
+    width: 100%;
+    font-size: 13px ;
+    color: #1A73E8;
+    margin: 20px 0px 0px 22px;
+}
+
+.main-body {
+    display: grid;
+    grid-template-rows: 48px 1fr;
+    margin-left: 12px;
+}
+
+.my-drive {
+    display: grid;
+    grid-template-columns: 1fr 48px 48px;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid #dbdcdc;
+    background-color: white;
+}
+
+.my-drive-btn{
+    display: inline-block;
+    width: 118px;
+    height: 32px;
+    background-color: white;
+    border: none;
+    margin-left: 4px;
+    border-radius: 7px;
+    font-size: 19px;
+}
+
+.my-drive-btn :hover {
+    background-color: #f2f2f2;;
+}
+
+.files{
+
+}
+
+.main-side-bar {
+    display: grid;
+    grid-template-rows: 52px 52px 80px 52px 1fr;
+    border-left: 1px solid #dbdcdc;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-side-bar div:nth-child(3n) {
+    border-bottom: 1px solid #dbdcdc;
+    padding-bottom: 28px;
+}

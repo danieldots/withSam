@@ -1,0 +1,102 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template: 1fr 1fr / 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+
+} @media screen and (max-width: 1500px) {
+    body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        justify-content: space-between;
+    }
+    
+} @media screen and (max-width: 750px) {
+    body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+    }
+    
+}
+
+
+.box1 {
+    width: 200px;
+    height: 200px;
+    background-color: aqua;
+    border: 1px solid black;
+    transition: 3s;
+} @media screen and (max-width: 1500px) {
+    .box1{
+        width: 600px;
+    }
+    
+} @media screen and (max-width: 750px) {
+    .box1{
+        width: 400px;
+        height: 400px;
+    }
+    
+}
+
+.box2 {
+    width: 200px;
+    height: 200px;
+    background-color: orchid;
+    border: 1px solid black;
+    transition: 5s;
+} @media screen and (max-width: 1500px) {
+    .box2{
+        width: 600px;
+    }
+} @media screen and (max-width: 750px) {
+    .box2{
+        display: none;
+    }
+    
+}
+
+.box3 {
+    width: 200px;
+    height: 200px;
+    background-color: skyblue;
+    border: 1px solid black;
+    transition: 7s;
+} @media screen and (max-width: 1500px) {
+    .box3{
+        width: 600px;
+    }   
+} @media screen and (max-width: 750px) {
+    .box3{
+        display: none;
+    }
+    
+}
+
+.box4 {
+    width: 200px;
+    height: 200px;
+    background-color: greenyellow;
+    border: 1px solid black;
+    transition: 9s;
+} @media screen and (max-width: 1500px) {
+    .box4{
+        width: 600px;
+    }   
+} @media screen and (max-width: 750px) {
+    .box4{
+        display: none;
+    }
+    
+}
+
+
+
+
