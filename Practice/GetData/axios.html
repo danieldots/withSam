@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function getImage() {
+            axios.get("https://api.thecatapi.com/v1/images/search?size=full")
+            .then(response => {
+                let catImage = response.data[0].url;
+                document.getElementById("cats").src = catImage;
+            })
+      }
+    </script>
+</head>
+<body>
+    <h1>귀여운 고양이 사진을 띄워보자냥 : axios</h1>
+    <button onclick="getImage()">눌러봐</button>
+    <br><br>
+    <div>
+        <img id="cats" width="300" src="https://cdn2.thecatapi.com/images/afp.jpg" alt="고양이사진">
+    </div>  
+</body>
+</html>
