@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+header {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.city-board {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+.city-board div {
+    margin: 5px;
+}
+.city-board input {
+    margin-top: 5px;
+    width: 200px;
+    text-align: center;
+}
+.city-board button {
+    margin-top: 10px;
+}
+
+.weather-board {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;   
+}
+.weather-board span {
+    margin: 5px;
+    text-align: center;    
+}
+.weather-board span:nth-child(1) {
+    font-weight: bold;
+    font-size: 50px;
+}
+.weather-board span:nth-child(2) {
+    font-size: 30px;
+}
+.weather-board span:nth-child(3) {
+    font-size: 30px;
+}

@@ -1,0 +1,173 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.modal-hidden {
+  display: none;
+}
+
+.modal-background {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.modal-window {
+  display: grid;
+  grid-template-rows: 120px 50px 50px 80px;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 300px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.modal-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+  margin-top: 15px;
+  font-size: 20px;
+  background-color: #4046D6;
+  color: white;
+}
+
+.modal-id {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  font-weight: bold;
+}
+
+.modal-password {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  font-weight: bold;
+}
+
+.modal-button {
+  display: flex;
+  justify-content: center;
+  width: 200px;
+}
+
+.modal-button:hover {
+  cursor: pointer;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 90% 80px;
+  align-items: center;
+  width: 100%;
+  height: 80px;
+  border-top: 3px solid rgb(0, 153, 255);
+  border-bottom: 3px solid rgb(0, 153, 255);
+  text-align: center;
+}
+
+.title-box {
+  width: 100%;
+  height: 40px;
+  font-size: 40px;
+}
+
+.sign-in-box {
+  width: 60px;
+  height: 20px;
+  font-size: 20px;
+}
+
+.sign-in-box:hover {
+  cursor: pointer
+}
+
+.sign-up-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.sign-up-form>div {
+  width: 100%;
+  height: 100px;
+  margin-left: 50px;
+}
+
+.sign-up-form>:nth-child(1) {
+  margin-top: 20px;
+}
+
+.sign-up-form>:nth-child(2) {
+  margin-top: 20px;
+}
+
+.sign-up-form__regNo>:nth-child(2) {
+  width: 50px;
+}
+
+.sign-up-form__regNo>:nth-child(3) {
+  width: 8px;
+}
+
+.sign-up-form__phoneNo input {
+  width: 35px;
+}
+
+.sign-up-form__password {
+  position: relative;
+}
+
+.sign-up-form__password span {
+  position: absolute;
+  font-size: 11px;
+  top: 23.5px;
+  left: 115px;
+  color: rgb(0, 0, 0, 0.7)
+}
+
+.sign-up-form__password span:hover {
+  cursor: pointer;
+}
+
+button {
+  width: 60px;
+  height: 22px;
+  margin-left: 5px;
+  font-size: 15px;
+  background-color: rgb(17, 125, 219);
+  border-radius: 3px;
+  border: none;
+  color: white;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.verify-text-fail {
+  color: rgba(255, 0, 0, 0.808);
+}
+
+.verify-text-success {
+  color: rgb(17, 125, 219);
+}

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal Practice</title>
+  <link href="index.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="modalBackground" class="modal-hidden">
+    <div id="modalWindow">
+      <div class="modal-login">로그인 해주세요 :)
+      </div>
+      <div class="modal-id">
+        <span>ID</span>
+        <input style="width:100px" id="input">
+      </div>
+      <div class="modal-password">
+        <span>PASSWORD</span>
+        <input style="width:100px" type="password">
+      </div>
+      <div class="modal-button">
+        <div>로그인하기</div>
+      </div>
+    </div>
+  </div>
+  <header>
+    <span class="title-box">
+        Modal Practice
+    </span>
+    <span id="signInBox" class="sign-in-box">
+        Sign In
+    </span>
+  </header>
+  <div class="sign-up-form">
+    <div class="sign-up-form__name">
+      <div>성함</div>
+      <input id="name-input" placeholder="성함">
+      <div id="name-verify-text"></div>
+    </div>
+    <div class="sign-up-form__regNo">
+      <div>주민번호</div>
+      <input id="reg-input1" maxlength="6" onkeyup="regNext(6, this.id, 'reg-input2')"> -
+      <input id="reg-input2" maxlength="1" onkeyup="regNext(1, this.id, 'reg-btn')">
+      <span style="width:20px">••••••</span>
+      <button id="reg-btn">확인</button>
+    </div>
+    <div class="sign-up-form__age">
+      <div>나이 (아직 완성X)</div>
+      <input placeholder="나이">
+      <button>확인</button>
+    </div>
+    <div class="sign-up-form__gender">
+      <div>성별 (아직 완성X)</div>
+      <input placeholder="성별">
+      <button>확인</button>
+    </div>
+    <div class="sign-up-form__address">
+      <div>주소</div>
+      <input id="address-input1" placeholder="도로명 주소" onkeydown="selectAddressType('address-input2')">
+      <button id="retype-btn">재입력</button>
+      </button>
+      <br>
+      <input id="address-input2" placeholder="지번 주소" onkeydown="selectAddressType('address-input1')">
+      <button id="address-btn">확인</button>
+    </div>
+    <div class="sign-up-form__email">
+      <div>이메일</div>
+      <input id="email-input" type="text" maxlength="50" placeholder="이메일">
+      <button id="email-btn">확인</button>
+      <div id="email-verify-text"></div>
+    </div>
+    <div class="sign-up-form__phoneNo">
+      <div>핸드폰 번호</div>
+      <input id="phoneNo-input1" maxlength="3" onkeyup="phoneNext(3, this.id, 'phoneNo-input2')"> -
+      <input id="phoneNo-input2" maxlength="4" onkeyup="phoneNext(4, this.id, 'phoneNo-input3')"> -
+      <input id="phoneNo-input3" maxlength="4" onkeyup="phoneNext(4, this.id, 'phoneNo-btn')">
+      <button id="phoneNo-btn">확인</button>
+    </div>
+    <div class="sign-up-form__id">
+      <div>아이디 (아직 완성X)</div>
+      <input placeholder="아이디">
+      <button>확인</button>
+    </div>
+    <div class="sign-up-form__password">
+      <div>비밀번호</div>
+      <input id="password-input" placeholder="비밀번호" type="password">
+      <span id="show-hide">Show</span>
+      <button id="password-btn">확인</button>
+      <div id="password-verify-text"></div>
+    </div>
+  </div>
+
+  <script>
+    // Debounce 함수
+    let timer;
+    const debounce = (callback, delay) => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(callback, delay);
+    }
+
+    // 이름 정규표현식
+    const debVerifyName = (e) => {
+      const {
+        currentTarget
+      } = e;
+      const nameVal = e.target.value;
+      const verifyName = (e) => {
+        const regExp = /^[가-힣]{2,5}$/;
+        const wrapper = document.getElementById("name-verify-text")
+        if (nameVal.match(regExp) == null) {
+          wrapper.innerHTML = "한글 이름(2~5글자)을 입력해주세요"
+          wrapper.classList.remove("verify-text-success")
+          wrapper.classList.add("verify-text-fail")
+        } else {
+          wrapper.innerHTML = ""
+          wrapper.classList.remove("verify-text-fail")
+        }
+      };
+      debounce(verifyName, 500);
+    }
+    document.getElementById("name-input").addEventListener('input', debVerifyName)
+
+    // 주민번호 자동 focus & 정규 표현식
+    const regNext = (N, Obj, nextID) => {
+      if (document.getElementById(Obj).value.length == N) {
+        document.getElementById(nextID).focus();
+      }
+    }
+    const verifyReg = () => {
+      const regVal1 = document.getElementById("reg-input1").value;
+      const regVal2 = document.getElementById("reg-input2").value;
+      const regExp = /^[0-9]+$/;
+      if (regVal1.match(regExp) != null && regVal2.match(regExp) != null) {
+        alert("유효한 주민번호입니다")
+      } else {
+        alert("유효하지 않은 주민번호입니다")
+      }
+    }
+    document.getElementById("reg-btn").addEventListener("click", verifyReg);
+
+    // 주소타입 선택 & 재입력 버튼 & 주소 정규 표현식
+    const selectAddressType = (otherID) => {
+      document.getElementById(otherID).setAttribute("disabled", true)
+    }
+    const retype = () => {
+      document.getElementById("address-input1").removeAttribute("disabled")
+      document.getElementById("address-input2").removeAttribute("disabled")
+      document.getElementById("address-input1").value = ""
+      document.getElementById("address-input2").value = ""
+    }
+    document.getElementById("retype-btn").addEventListener('click', retype)
+
+    const verifyAddress = () => {
+      const addressVal1 = document.getElementById("address-input1").value;
+      const addressVal2 = document.getElementById("address-input2").value;
+      const regExp1 = /(([가-힣A-Za-z·\d~\-\.]{2,}(로|길).[\d]+)|([가-힣A-Za-z·\d~\-\.]+(읍|동)\s)[\d]+)/;
+      const regExp2 = /(([가-힣A-Za-z·\d~\-\.]+(읍|동)\s)[\d-]+)|(([가-힣A-Za-z·\d~\-\.]+(읍|동)\s)[\d][^시]+)/;
+      if (addressVal1.match(regExp1) != null || addressVal2.match(regExp2) != null) {
+        alert("유효한 주소입니다")
+      } else {
+        alert("유효하지 않은 주소입니다")
+      }
+    }
+    document.getElementById("address-btn").addEventListener("click", verifyAddress);
+
+    // 이메일 정규 표현식 (타이핑 때마다 유효성 검사 & 버튼 유효성 검사)
+    const verifyEmailText = (e) => {
+      const emailVal = e.target.value
+      const regExp = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+      const wrapper = document.getElementById("email-verify-text")
+      if (emailVal.match(regExp) != null) {
+        wrapper.innerHTML = "유효한 이메일 주소입니다"
+        wrapper.classList.remove("verify-text-fail")
+        wrapper.classList.add("verify-text-success")
+      } else {
+        wrapper.innerHTML = "유효한 이메일 주소를 입력해주세요"
+        wrapper.classList.remove("verify-text-success")
+        wrapper.classList.add("verify-text-fail")
+      }
+    }
+    document.getElementById("email-input").addEventListener("input", verifyEmailText);
+
+    const verifyEmailBtn = () => {
+      const emailVal = document.getElementById("email-input").value;
+      const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+      if (emailVal.match(regExp) != null) {
+        alert("유효한 이메일 주소입니다")
+      } else {
+        alert("유효하지 않은 이메일 주소입니다")
+      }
+    }
+    document.getElementById("email-btn").addEventListener("click", verifyEmailBtn);
+
+    // 핸드폰번호 자동 focus & 정규 표현식
+    const phoneNext = (N, Obj, nextID) => {
+      if (document.getElementById(Obj).value.length == N) {
+        document.getElementById(nextID).focus();
+      }
+    }
+    const verifyPhoneNo = () => {
+      const phoneNoVal1 = document.getElementById("phoneNo-input1").value;
+      const phoneNoVal2 = document.getElementById("phoneNo-input2").value;
+      const phoneNoVal3 = document.getElementById("phoneNo-input3").value;
+      const regExp1 = /^01[0-9]$/
+      const regExp2 = /^[0-9]{4}$/
+      const regExp3 = /^[0-9]{4}$/
+      if (phoneNoVal1.match(regExp1) != null && phoneNoVal2.match(regExp2) != null && phoneNoVal3.match(regExp2) != null) {
+        alert("유효한 핸드폰 번호입니다")
+      } else {
+        alert("유효하지 않은 핸드폰 번호입니다")
+      }
+    }
+    document.getElementById("phoneNo-btn").addEventListener("click", verifyPhoneNo);
+
+    // 비밀번호 보이기/감추기 & 정규 표현식
+    const showHide = () => {
+      const selectSpan = document.getElementById("show-hide")
+      if (selectSpan.innerText == "Show") {
+        selectSpan.innerHTML = "Hide"
+        document.getElementById("password-input").removeAttribute("type")
+      } else if (selectSpan.innerText == "Hide") {
+        selectSpan.innerHTML = "Show"
+        document.getElementById("password-input").setAttribute("type", "password")
+      }
+    }
+    document.getElementById("show-hide").addEventListener('click', showHide)
+
+    const verifyPasswordText = (e) => {
+      const passwordVal = e.target.value
+      const regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
+      const wrapper = document.getElementById("password-verify-text")
+      if (passwordVal.match(regExp) != null) {
+        wrapper.innerHTML = "사용 가능한 비밀번호입니다"
+        wrapper.classList.remove("verify-text-fail")
+        wrapper.classList.add("verify-text-success")
+      } else {
+        wrapper.innerHTML = "대문자, 소문자, 숫자, 특수문자를 포함해서 8자리이상의 비밀번호를 만들어주세요"
+        wrapper.classList.remove("verify-text-success")
+        wrapper.classList.add("verify-text-fail")
+      }
+    }
+    document.getElementById("password-input").addEventListener("input", verifyPasswordText);
+    const verifyPasswordBtn = () => {
+      const passwordVal = document.getElementById("password-input").value;
+      const regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
+      if (passwordVal.match(regExp) != null) {
+        alert("사용 가능한 비밀번호입니다")
+      } else {
+        alert("대문자, 소문자, 숫자, 특수문자를 포함해서 8자리이상의 비밀번호를 만들어주세요")
+      }
+    }
+    document.getElementById("password-btn").addEventListener("click", verifyPasswordBtn)
+  </script>
+
+  <script>
+    const signInBox = document.getElementById("signInBox")
+    const modalBackground = document.getElementById("modalBackground")
+    const modalWindow = document.getElementById("modalWindow")
+    const openModal = (e) => {
+      modalBackground.classList.remove("modal-hidden")
+      modalWindow.classList.remove("modal-hidden")
+      modalBackground.classList.add("modal-background")
+      modalWindow.classList.add("modal-window")
+    }
+    signInBox.addEventListener('click', openModal)
+
+    const closeModal = (e) => {
+      if (e.target.classList.contains("modal-background")) {
+        modalBackground.classList.remove("modal-background")
+        modalWindow.classList.remove("modal-window")
+        modalBackground.classList.add("modal-hidden")
+        modalWindow.classList.add("modal-hidden")
+      }
+    }
+    modalBackground.addEventListener('click', closeModal)
+
+    const closeModalEsc = (e) => {
+      if (e.key == "Escape") {
+        modalBackground.classList.remove("modal-background")
+        modalWindow.classList.remove("modal-window")
+        modalBackground.classList.add("modal-hidden")
+        modalWindow.classList.add("modal-hidden")
+      }
+    }
+    window.addEventListener('keydown', closeModalEsc)
+  </script>
+</body>
+
+</html>

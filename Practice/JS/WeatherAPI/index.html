@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="index.css" rel="stylesheet">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <header>
+        세계의 날씨를 알아보자
+    </header>
+    <div class="city-board">
+        <div>
+            <button class="hey" value="Seoul">Seoul</button>
+            <button class="hey" value="New York">New York</button>
+            <button class="hey" value="파리">Paris</button>
+            <button class="hey" value="Alaska">Alaska</button>
+            <button class="hey" value="Los Angeles">Los Angeles</button>
+        </div>
+        <button>다른 도시의 날씨를 알아보자</button>
+        <input id="otherCity" placeholder="원하시는 도시, 주소를 입력하세요">
+    </div>
+    <div class="weather-board">
+        <span id="city"></span>
+        <span id="temp"></span>
+        <span id="weather"></span>
+    </div>
+    <script>
+        const city = document.getElementById("city");
+        const temp = document.getElementById("temp");
+        const weather = document.getElementById("weather");
+        const getWeather = async (e) => {
+            if (e.target.classList.contains("hey")){
+                const cityName = e.target.value
+                const KEY = "AIzaSyDHtOoqAOJwMJT1Uas0b_o2N1lY5QeofIg";
+                const APP_ID = "ec356d682fc0c279c39c5c9a7b64bc62";
+                const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${cityName},+Mountain+View,+CA&key=${KEY}`
+                const response = await axios.get(apiUrl)
+                const latValue = response.data.results[1].geometry.location.lat
+                const lonValue = response.data.results[1].geometry.location.lng
+                const getData = (lat, lon) => {
+                    city.innerHTML = "Loading...";
+                    temp.innerHTML = "Loading...";
+                    weather.innerHTML = "Loading...";
+                    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APP_ID}`
+                    axios.get(apiUrl).then(response => {
+                        const cityTemp = ((response.data.main.temp - 273.15).toFixed(2));
+                        const cityWeather = (response.data.weather[0].main);
+                        city.innerHTML = cityName;
+                        temp.innerHTML = `${cityTemp}°C`;
+                        weather.innerHTML = cityWeather;
+                    });
+                };
+                getData(latValue, lonValue);
+            }
+        }   
+        const cityButtonParent = document.querySelector("body > div.city-board > div")
+        cityButtonParent.addEventListener("click", getWeather);
+
+        const getOtherWeather = async () => {
+            const otherCity = document.getElementById("otherCity").value;
+            const KEY = "AIzaSyDHtOoqAOJwMJT1Uas0b_o2N1lY5QeofIg";
+            const APP_ID = "ec356d682fc0c279c39c5c9a7b64bc62";
+            const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${otherCity},+Mountain+View,+CA&key=${KEY}`
+            try {
+                const response = await axios.get(apiUrl)
+                const latValue = response.data.results[1].geometry.location.lat
+                const lonValue = response.data.results[1].geometry.location.lng
+
+                const getData = (lat, lon) => {
+                    city.innerHTML = "Loading...";
+                    temp.innerHTML = "Loading...";
+                    weather.innerHTML = "Loading...";
+                    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APP_ID}`
+                    axios.get(apiUrl).then(response => {
+                        const cityTemp = ((response.data.main.temp - 273.15).toFixed(2));
+                        const cityWeather = (response.data.weather[0].main);
+                        city.innerHTML = otherCity;
+                        temp.innerHTML = cityTemp + "°C";
+                        weather.innerHTML = cityWeather;
+                    });
+                };
+                getData(latValue, lonValue)
+            }
+            catch (e) {
+                throw new Error(alert("유효하지 않은 지역입니다"));
+            }
+        }
+        const otherCityButton = document.querySelector("body > div.city-board > button");
+        otherCityButton.addEventListener("click", getOtherWeather);
+    </script>
+</body>
+
+</html>

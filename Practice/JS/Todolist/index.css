@@ -1,0 +1,168 @@
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  
+  img {
+    cursor: pointer;
+  }
+  
+  svg {
+    cursor: pointer;
+  }
+  
+  button {
+    cursor: pointer;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 7px;
+  }
+  
+  .wrapper {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    width: 40vw;
+    height: 700px;
+    border-radius: 7px;
+    z-index: 1;
+  }
+  
+  .side-bar {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(235, 235, 235, 0.945);
+    border-radius: 7px 0px 0px 7px;
+  }
+  
+  .box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(91, 145, 207);
+    border-radius: 0px 7px 7px 0px;
+    z-index: -10;
+  }
+  
+  header {
+    display: grid;
+    grid-template-columns: 1fr 50px;
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 5px
+  }
+  
+  .header__title {
+    width: 100%;
+    height: 25px;
+    font-size: 25px;
+    margin-top: 10px;
+    margin-left: 20px;
+    color: white;
+  }
+  
+  .header__contexts {
+    width: 16px;
+    height: 16px;
+    margin: auto;
+  }
+  
+  .main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 80%;
+  }
+  
+  .main>div {
+    display: grid;
+    grid-template-columns: 30px 1fr 30px;
+    width: 96%;
+    height: 50px;
+    margin: 5px auto 0px auto;
+    border-radius: 7px;
+    background-color: white;
+  }
+  
+  .main__task-box {
+    display: grid;
+    grid-template-columns: 30px 1fr 30px;
+    width: 96%;
+    height: 50px;
+    margin: 5px auto 0px auto;
+    border-radius: 7px;
+    background-color: white;
+  }
+  
+  .main__check {
+    height: 100%;
+    border: none;
+    border-radius: 7px;
+    background-color: white;
+  }
+  
+  .main__task {
+    height: 100%;
+    line-height: 49px;
+    font-size: 14px;
+  }
+  
+  .main__task-completed {
+    height: 100%;
+    line-height: 49px;
+    font-size: 14px;
+    color: gray;
+    text-decoration: line-through
+  }
+  
+  .main__delete {
+    height: 100%;
+    border: none;
+    border-radius: 7px;
+    background-color: white;
+  }
+  
+  .add-task {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    justify-content: center;
+    align-items: center;
+    width: 96%;
+    height: 60px;
+    margin: auto;
+  }
+  
+  .add-task__btn {
+    width: 30px;
+    height: 40px;
+    border: none;
+    border-radius: 7px 0px 0px 7px;
+    background-color: white;
+  }
+  
+  .add-task__input {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 0px 7px 7px 0px;
+    background-color: white;
+  }
+  
+  .clear-btn {
+    width: 60px;
+    height: 30px;
+    align-self: flex-end;
+    margin-right: 14px;
+    font-size: 10px;
+    background-color: white;
+    border: none;
+    border-radius: 7px;
+  }

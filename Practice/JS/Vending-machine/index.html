@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="wallet_area.css">
+  <link rel="stylesheet" href="vm_area.css">
+  <title>Team Dots VM</title>
+</head>
+
+<body>
+
+  <div class="main">
+    <div class="vm-area ">
+      <div class="items">
+
+      </div>
+      <div class="non-items">
+        <div class="order">
+          <div class="order__board">
+            <div class="order__board-instruction"> 자판기에 돈을 넣어주세요</div>
+            <div class="order__board-money-insert"></div>
+            <div class="order__board-no"></div>
+          </div>
+          <div class="order__btns">
+            <div value="1" class="order__btns-div">1</div>
+            <div value="2" class="order__btns-div">2</div>
+            <div value="3" class="order__btns-div">3</div>
+            <div value="4" class="order__btns-div">4</div>
+            <div value="5" class="order__btns-div">5</div>
+            <div value="6" class="order__btns-div">6</div>
+            <div value="7" class="order__btns-div">7</div>
+            <div value="8" class="order__btns-div">8</div>
+            <div value="9" class="order__btns-div">9</div>
+          </div>
+          <div class="order__footer">
+            <div class="order__footer-confirm" value="0">확인</div>
+            <div class="order__footer-change"></div>
+          </div>
+        </div>
+        <div class="out-area">
+          <div class="out-area__glass"></div>
+        </div>
+      </div>
+    </div>
+    <div class="wallet-area">
+      <div class="board">
+        <div class="board-1"></div>
+        <div class="board-2"></div>
+      </div>
+      <div class="wallet">
+        <div class="wallet-front">
+          <div class="wallet-front-a">
+            <div style="width:160px; height:100px; margin: 0 auto; border-bottom: 4px solid rgb(64, 63, 63);"></div>
+          </div>
+        </div>
+        <div class="wallet-back">
+          <div class="wallet-back wallet-back-a">
+
+            <div style="width:160px; height:100px; margin: 0 auto; border-bottom: 4px solid rgb(64, 63, 63)"></div>
+          </div>
+          <div class="wallet-back wallet-back-b"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const $ = (query) => document.querySelector(query);
+    const $$ = (query) => document.querySelectorAll(query);
+    const delay = (n) => {
+      return new Promise((resolve) => {
+        setTimeout(resolve, n * 1000);
+      });
+    }
+
+    const walletBack = document.getElementsByClassName("wallet-back")
+    const paperMoney = document.getElementsByClassName("money")
+    const coinMoney = document.getElementsByClassName("coin")
+    const itemArray = $(".items")
+    const changeBtn = $(".order__footer-change")
+
+    const ITEM_LIST = [{
+      name: "마제소바",
+      no: 1,
+      price: 13500,
+      imgUrl: "data:image/jpeg;base64,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"
+    }, {
+      name: "마라탕",
+      no: 2,
+      price: 58000,
+      imgUrl: "https://img-cf.kurly.com/shop/data/goodsview/20211117/gv20000244636_1.jpg"
+    }, {
+      name: "젤리빙수",
+      no: 3,
+      price: 14500,
+      imgUrl: "자판기자료/제목 없는 그림 (1).png"
+    }, {
+      name: "모코코",
+      no: 4,
+      price: 75000,
+      imgUrl: "https://upload3.inven.co.kr/upload/2020/06/25/bbs/i14385119977.jpg"
+    }, {
+      name: "미숫가루",
+      no: 5,
+      price: 13500,
+      imgUrl: "data:image/jpeg;base64,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"
+    }, {
+      name: "헬로키티",
+      no: 6,
+      price: 66000,
+      imgUrl: "http://www.lookatwhatimade.net/wp-content/uploads/2012/05/hello-kitty-picture.png"
+    }, {
+      name: "전복버터구이",
+      no: 7,
+      price: 48000,
+      imgUrl: "https://recipe1.ezmember.co.kr/cache/recipe/2019/02/03/5f555a7b1b0c8b9170cdd35bab3fedb51.jpg"
+    }, {
+      name: "군대리아",
+      no: 8,
+      price: 99900,
+      imgUrl: "https://img.seoul.co.kr/img/upload/2020/12/29/SSI_20201229144148.jpg"
+    }, {
+      name: "준비중입니다",
+      no: 9,
+      price: 0,
+      imgUrl: ""
+    }]
+
+    //상품그리기
+    const paintItem = () => {
+      ITEM_LIST.forEach((item) => {
+        const itemBox = document.createElement('div')
+        itemBox.setAttribute("class", "item")
+        itemArray.appendChild(itemBox)
+
+        const itemImg = document.createElement('img')
+        itemImg.setAttribute("class", "item__img")
+        itemImg.setAttribute("src", item.imgUrl)
+        itemBox.appendChild(itemImg)
+
+        const itemDesc = document.createElement('div')
+        itemDesc.setAttribute("class", "item__desc")
+        itemDesc.innerText = `${item.no}. ${item.name}\n ₩${item.price.toLocaleString()}`
+        itemBox.appendChild(itemDesc)
+      });
+      for (let i = 0; i < 8; i++) {
+        $$(".item__desc")[i].setAttribute("value", [i + 1])
+      }
+      $(".items").lastChild.remove()
+    };
+    paintItem();
+
+    const moneyDetail = [{
+      value: 50000,
+      number: 1
+    }, {
+      value: 10000,
+      number: 2
+    }, {
+      value: 5000,
+      number: 4
+    }, {
+      value: 1000,
+      number: 7
+    }, {
+      value: 500,
+      number: 5
+    }, {
+      value: 100,
+      number: 5
+    }]
+
+    //현재 총 현금 구하기
+    let totalMoney = 0;
+    let selectedMoney = 0;
+    const calMoney = () => {
+      for (let i = 0; i < moneyDetail.length; i++) {
+        totalMoney = totalMoney + moneyDetail[i].number * moneyDetail[i].value
+      }
+    }
+    calMoney();
+
+    //전광판에 현황 표시하기
+    const show = (detail) => {
+      $(".board-1").innerText =
+        `다니엘 전재산:\n₩${totalMoney.toLocaleString()}`
+      $(".board-2").innerText =
+        `5만원 * ${detail[0].number}개
+    \n1만원 * ${detail[1].number}개
+    \n5천원 * ${detail[2].number}개
+    \n1천원 * ${detail[3].number}개
+    \n5백원 * ${detail[4].number}개
+    \n1백원 * ${detail[5].number}개`
+    }
+    show(moneyDetail)
+
+    //돈 그리기
+    const makeMoney = (val, type) => {
+      const makeMoney = document.createElement("div");
+      makeMoney.setAttribute("id", `${type}-${val}`)
+      makeMoney.setAttribute("value", val * 1000)
+      makeMoney.setAttribute("class", type)
+      makeMoney.innerText = val * 1000
+      makeMoney.classList.add(`${type}-${val}`)
+      document.getElementsByClassName("wallet-front-a")[0].appendChild(makeMoney)
+    }
+    const makeMoney50 = () => {
+      const makeMoney = document.createElement("div");
+      makeMoney.setAttribute("id", "money-50")
+      makeMoney.setAttribute("value", 50000)
+      makeMoney.setAttribute("class", "money")
+      makeMoney.innerText = "50000"
+      makeMoney.classList.add("money-50")
+      document.getElementsByClassName("wallet-front-a")[0].appendChild(makeMoney)
+    }
+    const makeMoney10 = () => {
+      const makeMoney = document.createElement("div");
+      makeMoney.setAttribute("id", "money-10")
+      makeMoney.setAttribute("value", 10000)
+      makeMoney.setAttribute("class", "money")
+      makeMoney.innerText = "10000"
+      makeMoney.classList.add("money-10")
+      document.getElementsByClassName("wallet-front-a")[0].appendChild(makeMoney)
+    }
+    const makeMoney5 = () => {
+      const makeMoney = document.createElement("div");
+      makeMoney.setAttribute("id", "money-5")
+      makeMoney.setAttribute("value", 5000)
+      makeMoney.setAttribute("class", "money")
+      makeMoney.innerText = "5000"
+      makeMoney.classList.add("money-5")
+      document.getElementsByClassName("wallet-front-a")[0].appendChild(makeMoney)
+    }
+    const makeMoney1 = () => {
+      const makeMoney = document.createElement("div");
+      makeMoney.setAttribute("id", "money-1")
+      makeMoney.setAttribute("value", 1000)
+      makeMoney.setAttribute("class", "money")
+      makeMoney.innerText = "1000"
+      makeMoney.classList.add("money-1")
+      document.getElementsByClassName("wallet-front-a")[0].appendChild(makeMoney)
+    }
+    const makeCoin5 = () => {
+      const makeMoney = document.createElement("div");
+      makeMoney.setAttribute("id", "coin-5")
+      makeMoney.setAttribute("value", 500)
+      makeMoney.setAttribute("class", "coin")
+      makeMoney.innerText = "500"
+      makeMoney.classList.add("coin-5")
+      document.getElementsByClassName("wallet-back-a")[0].appendChild(makeMoney)
+    }
+    const makeCoin1 = () => {
+      const makeMoney = document.createElement("div");
+      makeMoney.setAttribute("id", "coin-1")
+      makeMoney.setAttribute("value", 100)
+      makeMoney.setAttribute("class", "coin")
+      makeMoney.innerText = "100"
+      makeMoney.classList.add("coin-1")
+      document.getElementsByClassName("wallet-back-a")[0].appendChild(makeMoney)
+    }
+
+    const paintMoney = (money) => {
+      if (money.value == 50000) {
+        for (let i = 0; i < money.number; i++) makeMoney50()
+      } else if (money.value == 10000) {
+        for (let i = 0; i < money.number; i++) makeMoney10()
+      } else if (money.value == 5000) {
+        for (let i = 0; i < money.number; i++) makeMoney5()
+      } else if (money.value == 1000) {
+        for (let i = 0; i < money.number; i++) makeMoney1()
+      } else if (money.value == 500) {
+        for (let i = 0; i < money.number; i++) makeCoin5()
+      } else {
+        for (let i = 0; i < money.number; i++) makeCoin1()
+      }
+    }
+
+    //돈 꺼내기
+    const pullMoney = () => {
+      moneyDetail.forEach((money) => {
+        paintMoney(money)
+      })
+    }
+
+
+    //선택한 화폐 제거
+    const deleteMoney = (e) => {
+      e.target.remove()
+      const selectedValue = e.target.attributes[1].value;
+      if (selectedValue == 50000) {
+        moneyDetail[0].number = moneyDetail[0].number - 1
+      } else if (selectedValue == 10000) {
+        moneyDetail[1].number = moneyDetail[1].number - 1
+      }
+      if (selectedValue == 5000) {
+        moneyDetail[2].number = moneyDetail[2].number - 1
+      }
+      if (selectedValue == 1000) {
+        moneyDetail[3].number = moneyDetail[3].number - 1
+      }
+      if (selectedValue == 500) {
+        moneyDetail[4].number = moneyDetail[4].number - 1
+      }
+      if (selectedValue == 100) {
+        moneyDetail[5].number = moneyDetail[5].number - 1
+      }
+    }
+
+    //돈 클릭 시 이벤트 호출
+    const callEvent = async(e) => {
+      counter(e);
+      deleteMoney(e);
+      show(moneyDetail);
+      vmShow();
+      activateItem();
+    }
+
+    //돈 클릭시 금액 계산
+    const counter = (e) => {
+      const moneyValue = Number(e.target.getAttribute("value"));
+      selectedMoney = selectedMoney + moneyValue;
+      totalMoney = totalMoney - moneyValue;
+    }
+
+    const deleteCounterEevent = () => {
+      for (i = 0; i < paperMoney.length; i++) {
+        paperMoney[i].removeEventListener("click", callEvent)
+      }
+      for (i = 0; i < coinMoney.length; i++) {
+        coinMoney[i].removeEventListener("click", callEvent)
+      }
+    }
+
+    //돈클릭시 확인버튼에 value up
+    const addValue1 = (e) => {
+      if (e.target.classList.contains("money") || e.target.classList.contains("coin")) {
+        let confirmBtnValue = confirmBtn.getAttribute("value")
+        confirmBtn.setAttribute("value", Number(confirmBtnValue) + 1)
+        instruction.innerHTML = `원하시는 상품의 번호를 입력하신 후 확인 버튼을 눌러주세요`
+        $(".wallet").removeEventListener("click", addValue1)
+      }
+    }
+    $(".wallet").addEventListener("click", addValue1)
+
+
+    //돈에 이벤트 넣기
+    const setEvent = () => {
+      for (i = 0; i < paperMoney.length; i++) {
+        paperMoney[i].addEventListener("click", callEvent)
+      }
+      for (i = 0; i < coinMoney.length; i++) {
+        coinMoney[i].addEventListener("click", callEvent)
+      }
+    }
+
+    //지갑열기
+    const flip = async(e) => {
+      e.target.classList.add("wallet-back-flip");
+      e.target.parentNode.childNodes[1].classList.add("wallet-back-flip");
+      await delay(0.7);
+      await pullMoney();
+      await setEvent();
+    };
+    walletBack[2].addEventListener("click", flip)
+
+
+    const instruction = $(".order__board-instruction")
+    const moneyInsert = $(".order__board-money-insert")
+    const boardNo = $(".order__board-no")
+    const confirmBtn = $(".order__footer-confirm")
+    const orderBtns = $(".order__btns")
+
+    //자판기 영역 디스플레이
+    const vmShow = () => {
+      moneyInsert.innerText = `투입 금액: ${selectedMoney.toLocaleString()}원`
+    }
+
+    //마지막 누른 버튼 값 
+    let lastBtnValue = []
+
+    //번호 영역 버튼
+    const clickNo = (e) => {
+      if (e.target.classList.contains("order__btns-div") || e.target.classList.contains("item__desc")) {
+        lastBtnValue.pop()
+        lastBtnValue.push(e.target.getAttribute("value"));
+        let confirmBtnValue = confirmBtn.getAttribute("value")
+        if (confirmBtnValue == 0) {
+          alert("돈을 먼저 넣어주세요!")
+        } else {
+          confirmBtn.setAttribute("value", Number(confirmBtnValue) + 1)
+          const btnValue = e.target.getAttribute("value")
+          ITEM_LIST.forEach((item) => {
+            if (btnValue == 9) {
+              boardNo.innerText = `해당 상품은 준비중입니다 :)`
+              confirmBtn.setAttribute("value", 101)
+            } else if (btnValue == item.no && selectedMoney >= item.price) {
+              boardNo.innerText = `선택한 상품: \n${btnValue}. ${item.name} ${item.price.toLocaleString()}원\n주문하시겠습니까?`
+            } else if (btnValue == item.no && selectedMoney < item.price) {
+              boardNo.innerText = `선택한 상품: \n${btnValue}. ${item.name} ${item.price.toLocaleString()}원\n${(item.price-selectedMoney).toLocaleString()}원이 부족합니다`
+              confirmBtn.setAttribute("value", 201)
+            }
+          });
+        }
+      }
+    }
+    $$(".item__desc").forEach((itemDesc) => itemDesc.addEventListener("click", clickNo))
+    orderBtns.addEventListener("click", clickNo)
+
+
+    //번호영역 비활성화;
+    const removeEvent = () => {
+      $$(".item__desc").forEach((itemDesc) => itemDesc.removeEventListener("click", clickNo))
+      orderBtns.removeEventListener("click", clickNo)
+    }
+
+    //잔돈
+    let change = "";
+
+    //확인버튼 && 보드 작동
+    const clickConfirm = async() => {
+      let confirmBtnValue = confirmBtn.getAttribute("value")
+      if (confirmBtnValue == 0) {
+        alert("돈을 먼저 넣어주세요!")
+      } else if (confirmBtnValue == 1) {
+        alert("상품을 선택해주세요!")
+      } else if (confirmBtnValue == 101) {
+        instruction.innerHTML = `아 물건 없다니까?? ^^`
+      } else if (confirmBtnValue == 201) {
+        instruction.innerHTML = `돈 더 넣어주세요 고객님 ^^`
+      } else if (confirmBtnValue !== 0 && confirmBtnValue !== 1) {
+        instruction.innerHTML = `구매하신 상품이 나오는 중입니다. 잠시만 기다려주세요^^`
+        ITEM_LIST.forEach((item) => {
+          if (item.no == lastBtnValue) {
+            change = (`${selectedMoney - item.price}`)
+            moneyInsert.innerText = `잔돈: ${Number(change).toLocaleString()}원`
+            boardNo.innerText = `상품이 모두 나온 후\n잔돈이 나옵니다!`
+          }
+        })
+        deleteCounterEevent();
+        changeBtn.addEventListener("click", getChange, {
+          once: true
+        })
+        removeEvent();
+        getItem();
+      }
+    }
+    confirmBtn.addEventListener("click", clickConfirm);
+
+
+    //상품 활성화
+    const activateItem = () => {
+      itemLIst = [];
+      itemList = ITEM_LIST.filter((item) => item.price <= selectedMoney)
+      itemList.pop();
+      itemList.forEach((item) => {
+        if (item.no) {
+          $(".items").children[item.no - 1].children[1].classList.add("item__desc-activated")
+          $(".order__btns").children[item.no - 1].classList.add("item__desc-activated")
+        }
+      })
+    }
+
+    //상품 비활성화
+    const deactivateItem = () => {
+      $$(".item__desc-activated").forEach((itemDesc) => {
+        itemDesc.classList.remove("item__desc-activated")
+      })
+    }
+
+    //상품 가져오기
+    const getItem = () => {}
+
+    //잔돈 계산
+    let changeDetail = []
+    const calChange = (change) => {
+      if (change.length == 5) {
+        for (let i = 0; i < change.length - 2; i++) {
+          const changeNumber = change.substring(i, i + 1);
+          const changeUnit = 10000 / 10 ** i;
+          const changeDetailEach = {
+            value: changeUnit,
+            number: changeNumber
+          }
+          changeDetail.push(changeDetailEach)
+        }
+      } else if (change.length == 4) {
+        for (let i = 0; i < change.length - 2; i++) {
+          const changeNumber = change.substring(i, i + 1);
+          const changeUnit = 1000 / 10 ** i;
+          const changeDetailEach = {
+            value: changeUnit,
+            number: changeNumber
+          }
+          changeDetail.push(changeDetailEach)
+        }
+      } else if (change.length == 3) {
+        for (let i = 0; i < change.length - 2; i++) {
+          const changeNumber = change.substring(i, i + 1);
+          const changeUnit = 100 / 10 ** i;
+          const changeDetailEach = {
+            value: changeUnit,
+            number: changeNumber
+          }
+          changeDetail.push(changeDetailEach)
+        }
+      }
+
+
+      for (let i = 0; i < moneyDetail.length; i++) {
+        for (let k = 0; k < changeDetail.length; k++) {
+          if (moneyDetail[i].value == changeDetail[k].value) {
+            moneyDetail[i].number = Number(moneyDetail[i].number) + Number(changeDetail[k].number)
+          }
+        }
+      }
+    }
+
+    //잔돈 가져오기
+    const getChange = () => {
+      calChange(change);
+      console.log(changeDetail)
+      changeDetail.forEach((money) => {
+        paintMoney(money)
+      })
+      totalMoney = totalMoney + Number(change);
+      show(moneyDetail);
+      reset();
+    }
+
+    //자판기 리셋
+    const reset = () => {
+      selectedMoney = 0;
+      changeDetail = [];
+      setEvent();
+      vmShow();
+      deactivateItem();
+      instruction.innerText = `자판기에 돈을 넣어주세요`
+      boardNo.innerText = ``
+      orderBtns.addEventListener("click", clickNo);
+      confirmBtn.setAttribute("value", "0");
+      $(".wallet").addEventListener("click", addValue1)
+    }
+  </script>
+  <script>
+  </script>
+</body>
+
+</html>

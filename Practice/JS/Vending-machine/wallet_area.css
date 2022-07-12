@@ -1,0 +1,245 @@
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin-top: -60px;
+  }
+  
+  .main {
+    display: grid;
+    grid-template-columns: 1300px 500px;
+    width: 1600px;
+    height: 1000px;
+  }
+  
+  @keyframes flip {
+    0% {
+      transform: rotateY(0);
+    }
+    100% {
+      transform: rotateY(180deg);
+    }
+  }
+  
+  @keyframes pull50 {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-500px)
+    }
+  }
+  
+  @keyframes pull10 {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-390px)
+    }
+  }
+  
+  @keyframes pull5 {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-280px)
+    }
+  }
+  
+  @keyframes pull1 {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-170px)
+    }
+  }
+  
+  .wallet-area {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+  }
+  
+  .board {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    width: 350px;
+    height: 220px;
+    border-radius: 5px;
+    border: black 1px solid;
+    text-align: center;
+  }
+  
+  .board-1 {
+    padding-top: 80px;
+    font-weight: bold;
+    font-size: 24px;
+  }
+  
+  .board-2 {
+    padding-top: 17px;
+    line-height: 17px;
+  }
+  
+  .wallet {
+    position: absolute;
+    top: 770px;
+    left: 50px;
+    width: 400px;
+    height: 180px;
+    margin-bottom: 180px;
+    transform-style: preserve-3d;
+  }
+  
+  .wallet:hover {
+    cursor: pointer;
+  }
+  
+  .wallet-front {
+    position: absolute;
+    width: 200px;
+    height: 180px;
+  }
+  
+  .wallet-front-a {
+    position: absolute;
+    display: grid;
+    grid-template-rows: 90px 1fr;
+    width: 200px;
+    height: 180px;
+    background: #a55403;
+    border-radius: 10px 0 0 10px;
+    z-index: -1;
+  }
+  
+  .wallet-back {
+    position: absolute;
+    width: 200px;
+    height: 180px;
+    transform-origin: right;
+  }
+  
+  .wallet-back-a {
+    position: absolute;
+    width: 200px;
+    height: 180px;
+    border-radius: 10px 0 0 10px;
+    background: #834201;
+  }
+  
+  .wallet-back-b {
+    position: absolute;
+    width: 200px;
+    height: 180px;
+    backface-visibility: hidden;
+    border-radius: 10px 0 0 10px;
+    background: #834201;
+  }
+  
+  .wallet-back-flip {
+    animation: flip 1 forwards;
+    animation-duration: 1s;
+  }
+  
+  .money {
+    position: absolute;
+    left: 30px;
+    top: 38px;
+    width: 140px;
+    height: 60px;
+    padding-left: 10px;
+    background: #f4c961;
+    line-height: 100px;
+  }
+  
+  .money:hover {
+    box-shadow: 5px 5px gray;
+    cursor: pointer;
+  }
+  
+  .money-50 {
+    background: #ebc162;
+    animation: pull50 1 forwards;
+    animation-duration: 1s;
+  }
+  
+  .money-50:active {
+    box-shadow: 5px 5px gray;
+    background: #d19e29e2;
+  }
+  
+  .money-10 {
+    background: #85ca8b;
+    animation: pull10 1 forwards;
+    animation-duration: 1s;
+  }
+  
+  .money-10:active {
+    box-shadow: 5px 5px gray;
+    background: #307f376c;
+  }
+  
+  .money-5 {
+    background: #ddb093;
+    animation: pull5 1 forwards;
+    animation-duration: 1s;
+  }
+  
+  .money-5:active {
+    box-shadow: 5px 5px gray;
+    background: #c28760ce;
+  }
+  
+  .money-1 {
+    background: #adbaefc6;
+    animation: pull1 1 forwards;
+    animation-duration: 1s;
+  }
+  
+  .money-1:active {
+    box-shadow: 5px 5px gray;
+    background: #6a7fd1;
+  }
+  
+  .coin {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    margin-left: 75px;
+    margin-top: 50px;
+    border-radius: 50%;
+    background: silver;
+    transform: rotateY(-180deg);
+    text-align: center;
+    line-height: 50px;
+  }
+  
+  .coin:hover {
+    box-shadow: -3px 3px gray;
+    cursor: pointer;
+  }
+  
+  .coin:active {
+    box-shadow: -3px 3px gray;
+    background: rgba(70, 70, 70, 0.754);
+  }
+  
+  .coin-5 {
+    animation: pull10 1 forwards;
+    animation-duration: 1s;
+  }
+  
+  .coin-1 {
+    animation: pull5 1 forwards;
+    animation-duration: 1s;
+  }
